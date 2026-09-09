@@ -150,8 +150,12 @@
   @media (min-width: 861px) { #mobileMenu { display: none; } }
 
   /* ── scroll film stage ── */
-  #track { height: 720vh; position: relative; }
-  #stage { position: sticky; top: 0; height: 100vh; width: 100%; overflow: hidden; }
+  /* --vh1 is 1% of a *locked* viewport height, set/maintained in main.js so
+     a mobile browser's address bar hiding/showing mid-scroll can't shift
+     the film's pin math (raw vh units resize live with the address bar,
+     which is what causes the scroll animation to jump or freeze on phones). */
+  #track { height: calc(var(--vh1, 1vh) * 720); position: relative; }
+  #stage { position: sticky; top: 0; height: calc(var(--vh1, 1vh) * 100); width: 100%; overflow: hidden; }
   #film { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   #grain {
     position: absolute; inset: 0; z-index: 6; pointer-events: none; opacity: 0.05; mix-blend-mode: overlay;
